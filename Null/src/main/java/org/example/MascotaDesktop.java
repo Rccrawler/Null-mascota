@@ -1,12 +1,9 @@
 package org.example;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.net.URL;
 
 public class MascotaDesktop {
 
@@ -20,6 +17,10 @@ public class MascotaDesktop {
     public static void main(String[] args) {
         // Ejecuta la creación de la GUI en el hilo de eventos de Swing para seguridad.
         SwingUtilities.invokeLater(MascotaDesktop::crearYMostrarGui);
+    }
+
+    private static void pensamiento() {
+
     }
 
     private static void crearYMostrarGui() {
@@ -108,8 +109,9 @@ public class MascotaDesktop {
      */
     private static JPopupMenu crearMenuContextual() {
         JPopupMenu menu = new JPopupMenu();
-        menu.add("Alimentar");
+        menu.add("Hablar"); // Desplegar un chat
         menu.add("Jugar");
+
         menu.addSeparator();
 
         JMenuItem itemSalir = new JMenuItem("Salir");
@@ -133,8 +135,13 @@ public class MascotaDesktop {
         menu.add(tituloMenu);
         menu.addSeparator();
 
-        menu.add("Alimentar");
+        menu.add("Hablar"); // Desplegar un chat
         menu.add("Jugar");
+        menu.addSeparator(); // Línea separadora
+        menu.add("info");
+        menu.add("ajustes"); // Desplegar un diálogo de configuración
+        // indicador de comida y que ponga la bateria del ordenador
+
         menu.addSeparator(); // Línea separadora
 
         JMenuItem itemSalir = new JMenuItem("Salir");
@@ -145,44 +152,3 @@ public class MascotaDesktop {
     }
 }
 
-/**
- * Un panel personalizado que carga y dibuja la imagen de la mascota.
- */
-class PanelPersonaje extends JPanel {
-    private Image imagenPersonaje;
-
-    public PanelPersonaje(String rutaRecurso) {
-        setOpaque(false); // Esencial para que el fondo del panel sea transparente
-
-        // --- LÓGICA DE CARGA DE RECURSOS MEJORADA ---
-        URL urlImagen = getClass().getResource(rutaRecurso);
-        if (urlImagen == null) {
-            System.err.println("Recurso no encontrado: " + rutaRecurso);
-            // Muestra un error visual si la imagen no se encuentra
-            JOptionPane.showMessageDialog(this,
-                    "No se pudo encontrar la imagen de la mascota en: " + rutaRecurso,
-                    "Error de Recurso",
-                    JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                imagenPersonaje = ImageIO.read(urlImagen);
-            } catch (IOException e) {
-                e.printStackTrace();
-                // Muestra un error si hay problemas al leer el archivo de imagen
-                JOptionPane.showMessageDialog(this,
-                        "Error al leer el archivo de imagen.",
-                        "Error de I/O",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (imagenPersonaje != null) {
-            // Dibuja la imagen, escalándola para que ocupe todo el panel
-            g.drawImage(imagenPersonaje, 0, 0, this.getWidth(), this.getHeight(), this);
-        }
-    }
-}
