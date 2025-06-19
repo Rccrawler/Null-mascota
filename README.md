@@ -20,7 +20,5 @@ readme_content = """# 🧠 Null – Mascota Virtual con Emociones
 
 1. Clona el repositorio:
 
-```bash
-git clone https://github.com/tuusuario/null-mascota-virtual.git
-cd null-mascota-virtual
+2. Ejecuta el .exe o proyecto con inteji
 
