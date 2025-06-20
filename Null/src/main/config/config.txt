@@ -1,0 +1,3 @@
+NOMBRE_MASCOTA=NULL
+EDAD_MASCOTA_DIAS=
+ultimaEjecucion=

@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
+// java class MascotaDesktop
 public class MascotaDesktop {
 
     // --- 1. CONSTANTES PARA CONFIGURACIÓN ---
@@ -12,11 +15,33 @@ public class MascotaDesktop {
     private static final int ANCHO_MASCOTA = 150;
     private static final int ALTO_MASCOTA = 150;
     private static final String RUTA_IMAGEN = "/Marshadow.png"; // Ruta relativa a la carpeta 'resources'
-    private static final String NOMBRE_MASCOTA = "NULL";
+    private static String NOMBRE_MASCOTA = "NULL"; // Nombre por defecto de la mascota
 
     public static void main(String[] args) {
         // Ejecuta la creación de la GUI en el hilo de eventos de Swing para seguridad.
         SwingUtilities.invokeLater(MascotaDesktop::crearYMostrarGui);
+
+        LectorConfiguraciones config = new LectorConfiguraciones("config.txt"); // Ruta del archivo de configuración
+        NOMBRE_MASCOTA = config.obtenerVariable("NOMBRE_MASCOTA"); // Leer la variable 'usuario' del archivo de configuración
+        LocalDate hoy = LocalDate.now();
+
+        String fechaGuardadaTexto = config.obtenerVariable("ultimaEjecucion");
+
+        if (fechaGuardadaTexto != null && !fechaGuardadaTexto.isBlank()) {
+
+            LocalDate fechaGuardada = LocalDate.parse(fechaGuardadaTexto);
+
+            if (fechaGuardada.isBefore(hoy)) {
+                long diasPasados = ChronoUnit.DAYS.between(fechaGuardada, hoy) + 1;
+                System.out.println("Han pasado " + diasPasados + " días desde la última ejecución.");
+
+                // Guardar el total de días pasados
+                config.guardarVariable("EDAD_MASCOTA_DIAS", String.valueOf(diasPasados));
+            }
+        }
+
+        config.guardarVariable("ultimaEjecucion", hoy.toString());
+
     }
 
     private static void pensamiento() {

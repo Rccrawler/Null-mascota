@@ -6,6 +6,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 
+// java class PanelPersonaje
 class PanelPersonaje extends JPanel {
 
     /**
