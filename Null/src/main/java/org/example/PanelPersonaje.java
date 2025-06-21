@@ -49,4 +49,23 @@ class PanelPersonaje extends JPanel {
             g.drawImage(imagenPersonaje, 0, 0, this.getWidth(), this.getHeight(), this);
         }
     }
+
+    public void cambiarImagen(String rutaRecurso) {
+        URL urlImagen = getClass().getResource(rutaRecurso);
+        if (urlImagen == null) {
+            System.err.println("Recurso no encontrado: " + rutaRecurso);
+            // Opcional: mostrar un diálogo de error
+            return;
+        }
+        try {
+            this.imagenPersonaje = ImageIO.read(urlImagen);
+            // ¡Muy importante! Llama a repaint() para que Swing redibuje el componente
+            // y se muestre la nueva imagen.
+            this.repaint();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Opcional: mostrar un diálogo de error
+        }
+    }
+
 }

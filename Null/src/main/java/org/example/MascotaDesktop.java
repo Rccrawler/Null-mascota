@@ -14,8 +14,11 @@ public class MascotaDesktop {
     // Definimos los "números mágicos" como constantes. Así es más fácil cambiarlos después.
     private static final int ANCHO_MASCOTA = 150;
     private static final int ALTO_MASCOTA = 150;
-    private static final String RUTA_IMAGEN = "/Marshadow.png"; // Ruta relativa a la carpeta 'resources'
+    private static String RUTA_IMAGEN = "/Marshadow.png"; // Ruta relativa a la carpeta 'resources'
     private static String NOMBRE_MASCOTA = "NULL"; // Nombre por defecto de la mascota
+    protected static AlmacenSentimientos sentimientos = new AlmacenSentimientos(); // Cargar la clase de los sentimientos de la mascota
+
+    static PanelPersonaje panel = new PanelPersonaje(RUTA_IMAGEN);// defino la clase ha qui para poder haceder desde cualquier sitio ya que se necesita en barios metodos
 
     public static void main(String[] args) {
         // Ejecuta la creación de la GUI en el hilo de eventos de Swing para seguridad.
@@ -41,10 +44,28 @@ public class MascotaDesktop {
         }
 
         config.guardarVariable("ultimaEjecucion", hoy.toString());
-
+        pensamiento();
     }
 
     private static void pensamiento() {
+        /*
+        while (true){
+            try {
+                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            panel.cambiarImagen("/Marshadow.gif");
+            try {
+                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            panel.cambiarImagen("/Marshadow.png");
+        }*/
+
 
     }
 
@@ -61,7 +82,7 @@ public class MascotaDesktop {
 
         // --- 3. CREACIÓN DE COMPONENTES ---
         // El panel que contendrá y dibujará nuestra imagen
-        PanelPersonaje panel = new PanelPersonaje(RUTA_IMAGEN);
+        //PanelPersonaje panel = new PanelPersonaje(RUTA_IMAGEN);
 
         // El menú que aparece al hacer clic derecho
         JPopupMenu menuContextual = crearMenuContextual(frame);
@@ -140,7 +161,10 @@ public class MascotaDesktop {
         menu.addSeparator();
 
         JMenuItem itemSalir = new JMenuItem("Salir");
-        itemSalir.addActionListener(e -> System.exit(0));
+        itemSalir.addActionListener(e -> {
+            sentimientos.guardarSentimientos(); // Llama a la función antes de salir
+            System.exit(0);
+        });
         menu.add(itemSalir);
 
         return menu;
