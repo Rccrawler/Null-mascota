@@ -49,19 +49,19 @@ public class MascotaDesktop {
 
     private static boolean parpadeoActivo = false; // Variable para controlar el parpadeo
     private static void pensamiento() {
-        parpadeoYrespiracion(true, true);
+        parpadeoYrespiracion(true, true, true);
     }
 
-    private static void parpadeoYrespiracion(boolean parpadeoActivo, boolean dejarEsperaAntes) {
-
+    private static void parpadeoYrespiracion(boolean parpadeoActivo, boolean dejarEsperaAntes, boolean RespiracionActivo) {
         while (parpadeoActivo){
 
-            if (dejarEsperaAntes){
+            if (dejarEsperaAntes) {
                 try {
                     Thread.sleep(6000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                dejarEsperaAntes = false;
             }
 
             // Parpadeo de la mascota
@@ -102,41 +102,44 @@ public class MascotaDesktop {
             }
 
             // Respiración de la mascota
-            panel.cambiarImagen("/null-normal-respiracion-1.png");
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if(RespiracionActivo){
+                panel.cambiarImagen("/null-normal-respiracion-1.png");
+                try {
+                    // Pausa la ejecución durante 2 segundos (2000 milisegundos)
+                    Thread.sleep(140);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                panel.cambiarImagen("/null-normal-respiracion-2.png");
+                try {
+                    // Pausa la ejecución durante 2 segundos (2000 milisegundos)
+                    Thread.sleep(140);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                panel.cambiarImagen("/null-normal-respiracion-3.png");
+                try {
+                    // Pausa la ejecución durante 2 segundos (2000 milisegundos)
+                    Thread.sleep(140);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                panel.cambiarImagen("/null-normal-respiracion-4.png");
+                try {
+                    // Pausa la ejecución durante 2 segundos (2000 milisegundos)
+                    Thread.sleep(140);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                panel.cambiarImagen("/null-normal-respiracion-5.png");
+                try {
+                    // Pausa la ejecución durante 2 segundos (2000 milisegundos)
+                    Thread.sleep(4080);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-            panel.cambiarImagen("/null-normal-respiracion-2.png");
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            panel.cambiarImagen("/null-normal-respiracion-3.png");
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            panel.cambiarImagen("/null-normal-respiracion-4.png");
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            panel.cambiarImagen("/null-normal-respiracion-5.png");
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+
 
             // Parpadeo de la mascota
             panel.cambiarImagen("/null-normal-parpadeo-1.png");
