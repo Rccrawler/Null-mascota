@@ -49,10 +49,37 @@ public class MascotaDesktop {
 
     private static boolean parpadeoActivo = false; // Variable para controlar el parpadeo
     private static void pensamiento() {
-        parpadeoYrespiracion(true, true, true);
+        estado(true, true, true,"contento");
     }
 
-    private static void parpadeoYrespiracion(boolean parpadeoActivo, boolean dejarEsperaAntes, boolean RespiracionActivo) {
+    private static void estado(boolean parpadeoActivo, boolean dejarEsperaAntes, boolean RespiracionActivo, String estado) {
+
+        String estadoDefecto = "/null-normal.png";
+
+        switch (estado) {
+            case "normal":
+                estadoDefecto = "/null-normal.png";
+                break;
+            case "contento":
+                estadoDefecto = "/null-contento.png";
+                break;
+            case "serio":
+                estadoDefecto = "/null-serio.png";
+                break;
+            case "enfadado":
+                estadoDefecto = "/null-enfadado.png";
+                break;
+            case "asustado":
+                estadoDefecto = "/null-asustado.png";
+                break;
+            case "triste":
+                estadoDefecto = "/null-triste.png";
+                break;
+            default:
+                estadoDefecto = "/null-normal.png";
+                break;
+        }
+
         while (parpadeoActivo){
 
             if (dejarEsperaAntes) {
@@ -65,7 +92,7 @@ public class MascotaDesktop {
             }
 
             // Parpadeo de la mascota
-            panel.cambiarImagen("/null-normal-parpadeo-1.png");
+            panel.cambiarImagen(estadoDefecto); // la uno sienpre es la imajen del estado
             try {
                 // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                 Thread.sleep(80);
@@ -103,7 +130,7 @@ public class MascotaDesktop {
 
             // Respiración de la mascota
             if(RespiracionActivo){
-                panel.cambiarImagen("/null-normal-respiracion-1.png");
+                panel.cambiarImagen(estadoDefecto);
                 try {
                     // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                     Thread.sleep(140);
@@ -131,7 +158,7 @@ public class MascotaDesktop {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                panel.cambiarImagen("/null-normal-respiracion-5.png");
+                panel.cambiarImagen(estadoDefecto);
                 try {
                     // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                     Thread.sleep(4080);
@@ -142,7 +169,7 @@ public class MascotaDesktop {
 
 
             // Parpadeo de la mascota
-            panel.cambiarImagen("/null-normal-parpadeo-1.png");
+            panel.cambiarImagen(estadoDefecto);
             try {
                 // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                 Thread.sleep(80);
@@ -170,7 +197,7 @@ public class MascotaDesktop {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            panel.cambiarImagen("/null-normal-parpadeo-5.png");
+            panel.cambiarImagen(estadoDefecto);
             try {
                 // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                 Thread.sleep(80);
@@ -180,6 +207,27 @@ public class MascotaDesktop {
         }
     }
 
+    private static void moberse(String acion){
+        // Ejemplo de switch para acciones de movimiento
+        switch (acion) {
+            case "izquierda":
+                System.out.println("Mover a la izquierda");
+                break;
+            case "derecha":
+                System.out.println("Mover a la derecha");
+                break;
+            case "arriba":
+                System.out.println("Mover hacia arriba");
+                break;
+            case "abajo":
+                System.out.println("Mover hacia abajo");
+                break;
+            default:
+                System.out.println("Acción desconocida: " + acion);
+                break;
+        }
+
+    }
 
     private static void crearYMostrarGui() {
         // --- 2. CONFIGURACIÓN DE LA VENTANA (JFrame) ---
