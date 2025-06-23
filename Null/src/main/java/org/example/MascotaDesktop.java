@@ -18,7 +18,7 @@ public class MascotaDesktop {
     private static String NOMBRE_MASCOTA = "NULL"; // Nombre por defecto de la mascota
     protected static AlmacenSentimientos sentimientos = new AlmacenSentimientos(); // Cargar la clase de los sentimientos de la mascota
 
-    static PanelPersonaje panel = new PanelPersonaje(RUTA_IMAGEN);// defino la clase ha qui para poder haceder desde cualquier sitio ya que se necesita en barios metodos
+    static PanelPersonaje panel = new PanelPersonaje(RUTA_IMAGEN);// defino la clase aquí para poder haceder desde cualquier sitio, ya que se necesita en barios metodos
 
     public static void main(String[] args) {
         // Ejecuta la creación de la GUI en el hilo de eventos de Swing para seguridad.
