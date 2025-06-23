@@ -322,8 +322,14 @@ public class MascotaDesktop {
 
         JMenuItem itemSalir = new JMenuItem("Salir");
         itemSalir.addActionListener(e -> {
-            sentimientos.guardarSentimientos(); // Llama a la función antes de salir
-            System.exit(0);
+            sentimientos.guardarSentimientos(); // Guarda los sentimientos antes de salir
+            panel.cambiarImagen("/null-exit.png"); // Cambia la imagen a la de salida
+            try {
+                Thread.sleep(2000); // Espera 2 segundos para mostrar la imagen
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            System.exit(0); // Cierra la aplicación
         });
         menu.add(itemSalir);
 
