@@ -7,158 +7,117 @@ import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-// java class MascotaDesktop
 public class MascotaDesktop {
 
-    // --- 1. CONSTANTES PARA CONFIGURACIÓN ---
-    // Definimos los "números mágicos" como constantes. Así es más fácil cambiarlos después.
-    private static final int ANCHO_MASCOTA = 48;// 150 original
-    private static final int ALTO_MASCOTA = 140;// 150 original
-    private static String RUTA_IMAGEN = "/null-normal.png"; // Ruta relativa a la carpeta 'resources'
-    private static String NOMBRE_MASCOTA = "NULL"; // Nombre por defecto de la mascota
-    protected static AlmacenSentimientos sentimientos = new AlmacenSentimientos(); // Cargar la clase de los sentimientos de la mascota
+    // --- 1. CONSTANTES Y VARIABLES DE LA CLASE ---
+    private static final int ANCHO_MASCOTA = 48;
+    private static final int ALTO_MASCOTA = 140;
+    private static final String RUTA_IMAGEN_INICIAL = "/null-normal.png";
+    private static String NOMBRE_MASCOTA = "NULL";
+    protected static AlmacenSentimientos sentimientos = new AlmacenSentimientos();
 
-    static PanelPersonaje panel = new PanelPersonaje(RUTA_IMAGEN);// defino la clase aquí para poder haceder desde cualquier sitio, ya que se necesita en barios metodos
+    // Solo necesitamos UNA instancia del panel de la mascota y UNA del bocadillo
+    static PanelPersonaje panelMascota = new PanelPersonaje(RUTA_IMAGEN_INICIAL);
+    static PanelBocadillo panelBocadillo = new PanelBocadillo();
 
     public static void main(String[] args) {
-        // Ejecuta la creación de la GUI en el hilo de eventos de Swing para seguridad.
+        // --- INICIALIZACIÓN ---
+        LectorConfiguraciones config = new LectorConfiguraciones("config.txt");
+        NOMBRE_MASCOTA = config.obtenerVariable("NOMBRE_MASCOTA");
+        actualizarEdad(config);
+
+        // --- ARRANQUE DE LA INTERFAZ Y LÓGICA ---
         SwingUtilities.invokeLater(MascotaDesktop::crearYMostrarGui);
+        iniciarAnimacion();
+        iniciarPensamientos();
+    }
 
-        LectorConfiguraciones config = new LectorConfiguraciones("config.txt"); // Ruta del archivo de configuración
-        NOMBRE_MASCOTA = config.obtenerVariable("NOMBRE_MASCOTA"); // Leer la variable 'usuario' del archivo de configuración
+    private static void actualizarEdad(LectorConfiguraciones config) {
         LocalDate hoy = LocalDate.now();
-
         String fechaGuardadaTexto = config.obtenerVariable("ultimaEjecucion");
 
         if (fechaGuardadaTexto != null && !fechaGuardadaTexto.isBlank()) {
-
             LocalDate fechaGuardada = LocalDate.parse(fechaGuardadaTexto);
-
             if (fechaGuardada.isBefore(hoy)) {
-                long diasPasados = ChronoUnit.DAYS.between(fechaGuardada, hoy) + 1;
-                System.out.println("Han pasado " + diasPasados + " días desde la última ejecución.");
-
-                // Guardar el total de días pasados
-                config.guardarVariable("EDAD_MASCOTA_DIAS", String.valueOf(diasPasados));
+                long diasPasados = ChronoUnit.DAYS.between(fechaGuardada, hoy);
+                String edadActualStr = config.obtenerVariable("EDAD_MASCOTA_DIAS");
+                long edadActual = 0;
+                try {
+                    edadActual = Long.parseLong(edadActualStr);
+                } catch (NumberFormatException e) {
+                    System.err.println("La edad guardada no era un número. Se reinicia a 0.");
+                }
+                long nuevaEdad = edadActual + diasPasados;
+                System.out.println("Han pasado " + diasPasados + " días. La nueva edad es: " + nuevaEdad);
+                config.guardarVariable("EDAD_MASCOTA_DIAS", String.valueOf(nuevaEdad));
             }
+        } else {
+            config.guardarVariable("EDAD_MASCOTA_DIAS", "0");
         }
-
         config.guardarVariable("ultimaEjecucion", hoy.toString());
-        pensamiento();
     }
 
-    private static boolean parpadeoActivo = false; // Variable para controlar el parpadeo
-    private static void pensamiento() {
-        estado(true, true, true,"contento");
+    private static void iniciarAnimacion() {
+        // Ejecuta la animación en un hilo separado para no bloquear la interfaz
+        new Thread(() -> estado(true, true, true, "contento")).start();
     }
 
-    private static void estado(boolean parpadeoActivo, boolean dejarEsperaAntes, boolean RespiracionActivo, String estado) {
-
-        String estadoDefecto = "/null-normal.png";
-
+    private static void estado(boolean parpadeoActivo, boolean dejarEsperaAntes, boolean respiracionActivo, String estado) {
+        String estadoDefecto;
         switch (estado) {
-            case "normal":
-                estadoDefecto = "/null-normal.png";
-                break;
-            case "contento":
-                estadoDefecto = "/null-contento.png";
-                break;
-            case "serio":
-                estadoDefecto = "/null-serio.png";
-                break;
-            case "enfadado":
-                estadoDefecto = "/null-enfadado.png";
-                break;
-            case "asustado":
-                estadoDefecto = "/null-asustado.png";
-                break;
-            case "triste":
-                estadoDefecto = "/null-triste.png";
-                break;
-            default:
-                estadoDefecto = "/null-normal.png";
-                break;
+            case "contento": estadoDefecto = "/null-contento.png"; break;
+            // Añade más casos aquí...
+            default: estadoDefecto = "/null-normal.png"; break;
         }
 
-        while (parpadeoActivo){
+        if (dejarEsperaAntes) {
+            try { Thread.sleep(6000); } catch (InterruptedException e) { e.printStackTrace(); }
+        }
 
-            if (dejarEsperaAntes) {
-                try {
-                    Thread.sleep(6000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                dejarEsperaAntes = false;
-            }
+        while (parpadeoActivo) {
+            // Animación de parpadeo
+            panelMascota.cambiarImagen(estadoDefecto);
+            try { Thread.sleep(80); } catch (InterruptedException e) { e.printStackTrace(); }
+            panelMascota.cambiarImagen("/null-normal-parpadeo-2.png");
+            try { Thread.sleep(80); } catch (InterruptedException e) { e.printStackTrace(); }
+            panelMascota.cambiarImagen("/null-normal-parpadeo-3.png");
+            try { Thread.sleep(80); } catch (InterruptedException e) { e.printStackTrace(); }
+            panelMascota.cambiarImagen("/null-normal-parpadeo-4.png");
+            try { Thread.sleep(80); } catch (InterruptedException e) { e.printStackTrace(); }
+            panelMascota.cambiarImagen("/null-normal-parpadeo-5.png");
+            try { Thread.sleep(80); } catch (InterruptedException e) { e.printStackTrace(); }
 
-            // Parpadeo de la mascota
-            panel.cambiarImagen(estadoDefecto); // la uno sienpre es la imajen del estado
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            panel.cambiarImagen("/null-normal-parpadeo-2.png");
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            panel.cambiarImagen("/null-normal-parpadeo-3.png");
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            panel.cambiarImagen("/null-normal-parpadeo-4.png");
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            panel.cambiarImagen("/null-normal-parpadeo-5.png");
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            // Respiración de la mascota
-            if(RespiracionActivo){
-                panel.cambiarImagen(estadoDefecto);
+            // Animación de respiración
+            if(respiracionActivo){
+                panelMascota.cambiarImagen(estadoDefecto);
                 try {
                     // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                     Thread.sleep(140);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                panel.cambiarImagen("/null-normal-respiracion-2.png");
+                panelMascota.cambiarImagen("/null-normal-respiracion-2.png");
                 try {
                     // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                     Thread.sleep(140);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                panel.cambiarImagen("/null-normal-respiracion-3.png");
+                panelMascota.cambiarImagen("/null-normal-respiracion-3.png");
                 try {
                     // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                     Thread.sleep(140);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                panel.cambiarImagen("/null-normal-respiracion-4.png");
+                panelMascota.cambiarImagen("/null-normal-respiracion-4.png");
                 try {
                     // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                     Thread.sleep(140);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                panel.cambiarImagen(estadoDefecto);
+                panelMascota.cambiarImagen(estadoDefecto);
                 try {
                     // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                     Thread.sleep(4080);
@@ -167,180 +126,99 @@ public class MascotaDesktop {
                 }
             }
 
-
-            // Parpadeo de la mascota
-            panel.cambiarImagen(estadoDefecto);
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            panel.cambiarImagen("/null-normal-parpadeo-2.png");
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            panel.cambiarImagen("/null-normal-parpadeo-3.png");
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            panel.cambiarImagen("/null-normal-parpadeo-4.png");
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            panel.cambiarImagen(estadoDefecto);
-            try {
-                // Pausa la ejecución durante 2 segundos (2000 milisegundos)
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 
-    private static void moberse(String acion){
-        // Ejemplo de switch para acciones de movimiento
-        switch (acion) {
-            case "izquierda":
-                System.out.println("Mover a la izquierda");
-                break;
-            case "derecha":
-                System.out.println("Mover a la derecha");
-                break;
-            case "arriba":
-                System.out.println("Mover hacia arriba");
-                break;
-            case "abajo":
-                System.out.println("Mover hacia abajo");
-                break;
-            default:
-                System.out.println("Acción desconocida: " + acion);
-                break;
-        }
+    private static void iniciarPensamientos() {
+        // Un Timer que se ejecuta una vez después de 5 segundos para mostrar el bocadillo
+        Timer timerMostrar = new Timer(5000, e -> {
+            mostrarBocadillo("¡Tengo una idea!");
+            // Otro Timer para ocultar el bocadillo 4 segundos después
+            Timer timerOcultar = new Timer(4000, ev -> ocultarBocadillo());
+            timerOcultar.setRepeats(false);
+            timerOcultar.start();
+        });
+        timerMostrar.setRepeats(false);
+        timerMostrar.start();
+    }
 
+    public static void mostrarBocadillo(String mensaje) {
+        panelBocadillo.setTexto(mensaje);
+        panelBocadillo.setVisible(true);
+    }
+
+    public static void ocultarBocadillo() {
+        panelBocadillo.setVisible(false);
     }
 
     private static void crearYMostrarGui() {
-        // --- 2. CONFIGURACIÓN DE LA VENTANA (JFrame) ---
+        // --- 1. CREACIÓN Y CONFIGURACIÓN DE LA VENTANA PRINCIPAL (JFrame) ---
         JFrame frame = new JFrame();
-        frame.setSize(ANCHO_MASCOTA, ALTO_MASCOTA);
+        frame.setSize(200, ALTO_MASCOTA + 50); // Tamaño total para mascota y bocadillo
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setUndecorated(true);
+        frame.setAlwaysOnTop(true);
+        frame.setBackground(new Color(0, 0, 0, 0));
+        frame.getContentPane().setLayout(null); // Usamos layout nulo para posicionar a mano
 
-        // Configuración para que sea una mascota de escritorio
-        frame.setUndecorated(true);      // Sin bordes ni barra de título
-        frame.setAlwaysOnTop(true);      // Siempre encima de otras ventanas
-        frame.setBackground(new Color(0, 0, 0, 0)); // Fondo 100% transparente
+        // --- 2. POSICIONAMIENTO DE LOS COMPONENTES ---
+        // Se posicionan con setBounds(x, y, ancho, alto)
+        panelMascota.setBounds(100, 40, ANCHO_MASCOTA, ALTO_MASCOTA);
+        panelBocadillo.setBounds(10, 0, 150, 60);
+        panelBocadillo.setVisible(false); // Oculto al inicio
 
-        // --- 3. CREACIÓN DE COMPONENTES ---
-        // El panel que contendrá y dibujará nuestra imagen
-        //PanelPersonaje panel = new PanelPersonaje(RUTA_IMAGEN);
+        // --- 3. AÑADIR COMPONENTES A LA VENTANA ---
+        frame.getContentPane().add(panelBocadillo);
+        frame.getContentPane().add(panelMascota);
 
-        // El menú que aparece al hacer clic derecho
+        // --- 4. CONFIGURAR INTERACCIONES ---
         JPopupMenu menuContextual = crearMenuContextual(frame);
-        panel.setComponentPopupMenu(menuContextual);
+        panelMascota.setComponentPopupMenu(menuContextual); // El menú va en el panel de la mascota
+        configurarArrastreYMenu(frame, panelMascota, menuContextual);
 
-        // --- 4. LÓGICA DE INTERACCIÓN (ARRASTRE) ---
-        configurarArrastreYMenu(frame, panel, menuContextual);
+        ToolTipManager.sharedInstance().registerComponent(panelMascota);
 
-        // --- 5. ENSAMBLAJE Y VISUALIZACIÓN ---
-        frame.add(panel);
-        frame.setLocationRelativeTo(null); // Centra la ventana al iniciar
+        // B. Establecemos el texto que queremos que aparezca.
+        panelMascota.setToolTipText("Estado: Contento");
+
+        // --- 5. HACER VISIBLE LA VENTANA ---
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    /**
-     * Configura los listeners para permitir que la ventana se arrastre con el ratón.
-     */
     private static void configurarArrastreYMenu(JFrame frame, JPanel panel, JPopupMenu menu) {
         final Point[] initialClick = new Point[1];
-
-        // Se crea un único "escuchador" (Adapter) para todos los eventos de ratón.
         MouseAdapter adapter = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                // Comprueba si el clic es el que debe mostrar el menú (normalmente clic derecho)
                 if (e.isPopupTrigger()) {
                     menu.show(e.getComponent(), e.getX(), e.getY());
                 } else {
-                    // Si es cualquier otro clic, lo usamos para empezar a arrastrar.
                     initialClick[0] = e.getPoint();
                 }
             }
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                // Solo arrastra si el clic inicial no es nulo (es decir, se empezó con un clic izquierdo)
-                if (initialClick[0] == null) {
-                    return;
-                }
-
-                // Lógica de arrastre correcta usando coordenadas de la pantalla
+                if (initialClick[0] == null) return;
                 int xOnScreen = e.getXOnScreen();
                 int yOnScreen = e.getYOnScreen();
-
-                int nuevaX = xOnScreen - initialClick[0].x;
-                int nuevaY = yOnScreen - initialClick[0].y;
-
-                frame.setLocation(nuevaX, nuevaY);
+                frame.setLocation(xOnScreen - initialClick[0].x, yOnScreen - initialClick[0].y);
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                // Se comprueba también al soltar el clic, por compatibilidad con Windows y otros SO
                 if (e.isPopupTrigger()) {
                     menu.show(e.getComponent(), e.getX(), e.getY());
                 }
-                // Al soltar el botón, se reinicia el punto de clic para el próximo arrastre.
                 initialClick[0] = null;
             }
         };
-
-        // Se añade el mismo "escuchador" al panel para ambos tipos de evento.
         panel.addMouseListener(adapter);
         panel.addMouseMotionListener(adapter);
     }
 
-    /**
-     * Crea y devuelve el JPopupMenu con las opciones para la mascota.
-     * CAMBIO: Ya no necesita el parámetro 'frame'.
-     */
-    private static JPopupMenu crearMenuContextual() {
-        JPopupMenu menu = new JPopupMenu();
-        menu.add("Hablar"); // Desplegar un chat
-        menu.add("Jugar");
-
-        menu.addSeparator();
-
-        JMenuItem itemSalir = new JMenuItem("Salir");
-        itemSalir.addActionListener(e -> {
-            sentimientos.guardarSentimientos(); // Guarda los sentimientos antes de salir
-            panel.cambiarImagen("/null-exit.png"); // Cambia la imagen a la de salida
-            try {
-                Thread.sleep(2000); // Espera 2 segundos para mostrar la imagen
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            System.exit(0); // Cierra la aplicación
-        });
-        menu.add(itemSalir);
-
-        return menu;
-    }
-
-    /**
-     * Crea y devuelve el JPopupMenu con las opciones para la mascota.
-     */
     private static JPopupMenu crearMenuContextual(JFrame frame) {
-
         JPopupMenu menu = new JPopupMenu();
 
         JMenuItem tituloMenu = new JMenuItem(NOMBRE_MASCOTA);
@@ -350,20 +228,46 @@ public class MascotaDesktop {
         menu.add(tituloMenu);
         menu.addSeparator();
 
-        menu.add("Hablar"); // Desplegar un chat
         menu.add("Jugar");
-        menu.addSeparator(); // Línea separadora
-        menu.add("info");
-        menu.add("ajustes"); // Desplegar un diálogo de configuración
-        // indicador de comida y que ponga la bateria del ordenador
 
-        menu.addSeparator(); // Línea separadora
+        menu.add("Ablar");
+
+        menu.addSeparator();
+
+        JMenuItem itemInfo = new JMenuItem("Info");
+        itemInfo.addActionListener(e -> {
+            LectorConfiguraciones infoConfig = new LectorConfiguraciones("config.txt");
+            String nombre = infoConfig.obtenerVariable("NOMBRE_MASCOTA");
+            String edad = infoConfig.obtenerVariable("EDAD_MASCOTA_DIAS");
+            String felicidad = infoConfig.obtenerVariable("FELICIDAD");
+            String salud = infoConfig.obtenerVariable("SALUD");
+
+            String mensaje = "<html>" +
+                    "<b>Nombre:</b> " + nombre + "<br>" +
+                    "<b>Edad:</b> " + edad + " días<br>" +
+                    "<b>Felicidad:</b> " + felicidad + "<br>" +
+                    "<b>Salud:</b> " + salud + "<br>" +
+                    "</html>";
+
+            JOptionPane.showMessageDialog(frame, mensaje, "Información de la Mascota", JOptionPane.INFORMATION_MESSAGE);
+        });
+        menu.add(itemInfo);
+
+        menu.add("Ajustes");
+        menu.addSeparator();
 
         JMenuItem itemSalir = new JMenuItem("Salir");
-        itemSalir.addActionListener(e -> System.exit(0));
+        itemSalir.addActionListener(e -> {
+            sentimientos.guardarSentimientos();
+            // Animación de salida opcional
+            new Thread(() -> {
+                panelMascota.cambiarImagen("/null-exit.png");
+                try { Thread.sleep(1500); } catch (InterruptedException ex) {}
+                System.exit(0);
+            }).start();
+        });
         menu.add(itemSalir);
 
         return menu;
     }
 }
-

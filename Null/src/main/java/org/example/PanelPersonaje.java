@@ -14,6 +14,7 @@ class PanelPersonaje extends JPanel {
      */
 
     private Image imagenPersonaje;
+    private Image iconoEstado; // Variable para la imagen del icono
 
     public PanelPersonaje(String rutaRecurso) {
         setOpaque(false); // Esencial para que el fondo del panel sea transparente
@@ -48,24 +49,48 @@ class PanelPersonaje extends JPanel {
             // Dibuja la imagen, escalándola para que ocupe todo el panel
             g.drawImage(imagenPersonaje, 0, 0, this.getWidth(), this.getHeight(), this);
         }
+
+        // 2. Dibuja el icono de estado encima, si existe
+        if (iconoEstado != null) {
+            // Posición: Arriba a la derecha. Puedes cambiar los números para moverlo.
+            int iconoX = this.getWidth() - 28; // 24px de ancho del icono + 4px de margen
+            int iconoY = 5; // 5px desde el borde superior
+            g.drawImage(iconoEstado, iconoX, iconoY, 24, 24, this); // Dibuja el icono a 24x24px
+        }
     }
 
     public void cambiarImagen(String rutaRecurso) {
         URL urlImagen = getClass().getResource(rutaRecurso);
         if (urlImagen == null) {
             System.err.println("Recurso no encontrado: " + rutaRecurso);
-            // Opcional: mostrar un diálogo de error
             return;
         }
         try {
             this.imagenPersonaje = ImageIO.read(urlImagen);
-            // ¡Muy importante! Llama a repaint() para que Swing redibuje el componente
-            // y se muestre la nueva imagen.
+            // ¡Muy importante! Llama a repaint() para que se muestre la nueva imagen.
             this.repaint();
         } catch (IOException e) {
             e.printStackTrace();
             // Opcional: mostrar un diálogo de error
         }
+    }
+
+    // Método para establecer el icono de estado
+    public void setIconoEstado(String rutaRecursoIcono) {
+        if (rutaRecursoIcono == null) {
+            this.iconoEstado = null;
+        } else {
+            URL urlIcono = getClass().getResource(rutaRecursoIcono);
+            if (urlIcono != null) {
+                try {
+                    this.iconoEstado = ImageIO.read(urlIcono);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    this.iconoEstado = null;
+                }
+            }
+        }
+        this.repaint(); // Redibuja el panel para mostrar el cambio
     }
 
 }
