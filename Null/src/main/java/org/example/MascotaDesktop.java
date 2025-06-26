@@ -12,7 +12,11 @@ public class MascotaDesktop {
     // --- 1. CONSTANTES Y VARIABLES DE LA CLASE ---
     private static final int ANCHO_MASCOTA = 48;
     private static final int ALTO_MASCOTA = 140;
-    private static final String RUTA_IMAGEN_INICIAL = "/null-normal.png";
+    private static final String RUTA_BASE_IMAGENES = "resources/";
+
+    // Las rutas ahora no llevan la barra "/" al principio.
+    private static final String RUTA_IMAGEN_INICIAL = RUTA_BASE_IMAGENES + "null-normal.png";
+    //private static final String RUTA_IMAGEN_INICIAL = "/null-normal.png";
     private static String NOMBRE_MASCOTA = "NULL";
     protected static AlmacenSentimientos sentimientos = new AlmacenSentimientos();
 
@@ -65,9 +69,9 @@ public class MascotaDesktop {
     private static void estado(boolean parpadeoActivo, boolean dejarEsperaAntes, boolean respiracionActivo, String estado) {
         String estadoDefecto;
         switch (estado) {
-            case "contento": estadoDefecto = "/null-contento.png"; break;
+            case "contento": estadoDefecto = RUTA_BASE_IMAGENES + "/null-contento.png"; break;
             // Añade más casos aquí...
-            default: estadoDefecto = "/null-normal.png"; break;
+            default: estadoDefecto = RUTA_BASE_IMAGENES + "/null-normal.png"; break;
         }
 
         if (dejarEsperaAntes) {
@@ -78,13 +82,13 @@ public class MascotaDesktop {
             // Animación de parpadeo
             panelMascota.cambiarImagen(estadoDefecto);
             try { Thread.sleep(80); } catch (InterruptedException e) { e.printStackTrace(); }
-            panelMascota.cambiarImagen("/null-normal-parpadeo-2.png");
+            panelMascota.cambiarImagen(RUTA_BASE_IMAGENES + "/null-normal-parpadeo-2.png");
             try { Thread.sleep(80); } catch (InterruptedException e) { e.printStackTrace(); }
-            panelMascota.cambiarImagen("/null-normal-parpadeo-3.png");
+            panelMascota.cambiarImagen(RUTA_BASE_IMAGENES + "/null-normal-parpadeo-3.png");
             try { Thread.sleep(80); } catch (InterruptedException e) { e.printStackTrace(); }
-            panelMascota.cambiarImagen("/null-normal-parpadeo-4.png");
+            panelMascota.cambiarImagen(RUTA_BASE_IMAGENES + "/null-normal-parpadeo-4.png");
             try { Thread.sleep(80); } catch (InterruptedException e) { e.printStackTrace(); }
-            panelMascota.cambiarImagen("/null-normal-parpadeo-5.png");
+            panelMascota.cambiarImagen(RUTA_BASE_IMAGENES + "/null-normal-parpadeo-5.png");
             try { Thread.sleep(80); } catch (InterruptedException e) { e.printStackTrace(); }
 
             // Animación de respiración
@@ -96,21 +100,21 @@ public class MascotaDesktop {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                panelMascota.cambiarImagen("/null-normal-respiracion-2.png");
+                panelMascota.cambiarImagen(RUTA_BASE_IMAGENES + "/null-normal-respiracion-2.png");
                 try {
                     // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                     Thread.sleep(140);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                panelMascota.cambiarImagen("/null-normal-respiracion-3.png");
+                panelMascota.cambiarImagen(RUTA_BASE_IMAGENES + "/null-normal-respiracion-3.png");
                 try {
                     // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                     Thread.sleep(140);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                panelMascota.cambiarImagen("/null-normal-respiracion-4.png");
+                panelMascota.cambiarImagen(RUTA_BASE_IMAGENES + "/null-normal-respiracion-4.png");
                 try {
                     // Pausa la ejecución durante 2 segundos (2000 milisegundos)
                     Thread.sleep(140);
@@ -264,7 +268,7 @@ public class MascotaDesktop {
             sentimientos.guardarSentimientos();
             // Animación de salida opcional
             new Thread(() -> {
-                panelMascota.cambiarImagen("/null-exit.png");
+                panelMascota.cambiarImagen(RUTA_BASE_IMAGENES + "/null-exit.png");
                 try { Thread.sleep(1500); } catch (InterruptedException ex) {}
                 System.exit(0);
             }).start();
