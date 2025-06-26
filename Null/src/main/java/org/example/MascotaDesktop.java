@@ -179,7 +179,7 @@ public class MascotaDesktop {
         ToolTipManager.sharedInstance().registerComponent(panelMascota);
 
         // B. Establecemos el texto que queremos que aparezca.
-        panelMascota.setToolTipText("Estado: Contento");
+        panelMascota.setToolTipText(NOMBRE_MASCOTA);
 
         // --- 5. HACER VISIBLE LA VENTANA ---
         frame.setLocationRelativeTo(null);
@@ -237,16 +237,19 @@ public class MascotaDesktop {
         JMenuItem itemInfo = new JMenuItem("Info");
         itemInfo.addActionListener(e -> {
             LectorConfiguraciones infoConfig = new LectorConfiguraciones("config.txt");
-            String nombre = infoConfig.obtenerVariable("NOMBRE_MASCOTA");
             String edad = infoConfig.obtenerVariable("EDAD_MASCOTA_DIAS");
-            String felicidad = infoConfig.obtenerVariable("FELICIDAD");
-            String salud = infoConfig.obtenerVariable("SALUD");
 
             String mensaje = "<html>" +
-                    "<b>Nombre:</b> " + nombre + "<br>" +
-                    "<b>Edad:</b> " + edad + " días<br>" +
-                    "<b>Felicidad:</b> " + felicidad + "<br>" +
-                    "<b>Salud:</b> " + salud + "<br>" +
+                    "<b>Tu mascota:</b> " + NOMBRE_MASCOTA + "<br>" +
+                    "<b>es una mascota muy especial.</b><br>" +
+                    "<b>Puedes comunicarte con ella</b><br>" +
+                    "<b>no solo a través del chat,</b><br>" +
+                    "<b>sino también mediante el sistema</b><br>" +
+                    "<b>operativo o navegador.</b><br>" +
+                    "<b>Puede enfadarse o ayudarte,</b><br>" +
+                    "<b>dependiendo de cómo la trates.</b><br>" +
+                    "<b>Edad de la mascota (en días):</b> " + edad + "<br>" +
+                    "<b>Repositorio GitHub:</b> <a href='https://github.com/Rccrawler/Null-mascota.git'>Null Mascota</a><br>" +
                     "</html>";
 
             JOptionPane.showMessageDialog(frame, mensaje, "Información de la Mascota", JOptionPane.INFORMATION_MESSAGE);
