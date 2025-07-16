@@ -1,0 +1,4 @@
+pip install llama-cpp-python
+pyinstaller --onefile ia_servidor.py
+Runtime.getRuntime().exec("bot_servidor.exe");
+start /min "" "bot_servidor.exe"
