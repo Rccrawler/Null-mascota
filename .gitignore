@@ -3,3 +3,7 @@ ia_servidor/Mistral-7B-Instruct-v0.3-Q3_K_M.gguf
 ia_servidor/Mistral-7B-Instruct-v0.3-Q4_K_M.gguf
 ia_servidor/Mistral-7B-Instruct-v0.3-Q5_K_S.gguf
 ia_servidor/mistralai_Magistral-Small-2506-IQ2_M.gguf
+ia_servidor/Mistral-Small-3.2-24B-Instruct-2506-UD-IQ2_XXS.gguf
+ia_servidor/mistralai_Mistral-Small-3.1-24B-Instruct-2503-IQ2_XXS.gguf
+ia_servidor/mistralai_Mistral-Small-3.1-24B-Instruct-2503-Q4_K_M.gguf
+ia_servidor/mistralai_Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S.gguf

@@ -34,13 +34,21 @@ public class BotCliente {
         String respuesta2 = preguntarAlBot("¿Quien te ha puesto ese nonbre?");
         System.out.println("Bot: " + respuesta2);
 
-        // Mistral model .gguf                          haciertos    tempo
-        // mistral-7b-instruct-v0.2.Q3_K_M                 3/5
-        // Mistral-7B-Instruct-v0.3-Q3_K_M                 /5
-        // Mistral-7B-Instruct-v0.3-Q4_K_M                 /5
-        // Mistral-7B-Instruct-v0.3-Q5_K_S                 /5
-        // mistralai_Magistral-Small-2506-IQ2_M            /5
-        // Mistral-Small-3.2-24B-Instruct-2506-UD-IQ2_XXS  /5
+        // añadir limite de uso de cpu o grafica demasiada tenperatura
+        // limitar el pensamiento del sentimiento
+        // probar modelo original sin cuantizar
+        // Problema con lo de recordar respuestas tarda demasiado
+        // Mistral model .gguf                          haciertos    tempo   tiempo-pregunta7                       usar
+        // mistral-7b-instruct-v0.2.Q3_K_M                 3/5       08:15   01:16                                   NO
+        // Mistral-7B-Instruct-v0.3-Q3_K_M                 3/5       08:51   01:21                                   NO
+        // Mistral-7B-Instruct-v0.3-Q4_K_M                 3/5       08:05m  01:15   //mejor domino del español
+        // Mistral-7B-Instruct-v0.3-Q5_K_S                 3/5       10:30m  01:47   //mas consumidora               NO
+        // mistralai_Magistral-Small-2506-IQ2_M            2/5       17:04m  02:43   // lentisimo                    NO
+        // Mistral-Small-3.2-24B-Instruct-2506-UD-IQ2_XXS  4/5       20:56m  03:53   // Mas lijera lentisnimo        NO
+        // mistralai_Mistral-Small-3.1-24B-Instruct-2503-Q4_K_M  /5                  // Mejores tenperaturas
+        // mistralai_Mistral-Small-3.1-24B-Instruct-2503-IQ2_XXS 2/5 09:40   01:34   // Poca precision               NO
+        // mistralai_Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S  4/5 03:08   00:44   // Velocidad inpecable
+        // https://huggingface.co/bartowski/mistralai_Mistral-Small-3.1-24B-Instruct-2503-GGUF/resolve/main/mistralai_Mistral-Small-3.1-24B-Instruct-2503-Q6_K.gguf?download=true
 
         // Probamos la calidad del bot con una pregunta difícil
         String respuesta3 = preguntarAlBot("Cual es la pregunta mas difícil que te han hecho?");
