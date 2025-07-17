@@ -34,12 +34,14 @@ public class BotCliente {
         String respuesta2 = preguntarAlBot("¿Quien te ha puesto ese nonbre?");
         System.out.println("Bot: " + respuesta2);
 
-        // Mistral              haciertos   tempo
-        // modelo v0.2.Q3_K_M   3/5
-        // modelo v0.3.Q3_K_M   /5
-        // modelo v0.3.Q4_K_M   /5
-        // modelo v0.3.Q5_K_S   /5
-        // modelor Small-2506IQ2_M   /5
+        // Mistral model .gguf                          haciertos    tempo
+        // mistral-7b-instruct-v0.2.Q3_K_M                 3/5
+        // Mistral-7B-Instruct-v0.3-Q3_K_M                 /5
+        // Mistral-7B-Instruct-v0.3-Q4_K_M                 /5
+        // Mistral-7B-Instruct-v0.3-Q5_K_S                 /5
+        // mistralai_Magistral-Small-2506-IQ2_M            /5
+        // Mistral-Small-3.2-24B-Instruct-2506-UD-IQ2_XXS  /5
+
         // Probamos la calidad del bot con una pregunta difícil
         String respuesta3 = preguntarAlBot("Cual es la pregunta mas difícil que te han hecho?");
         System.out.println("Bot: "+" 1 " + respuesta3);
