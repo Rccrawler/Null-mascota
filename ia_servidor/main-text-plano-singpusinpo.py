@@ -9,13 +9,17 @@ from datetime import datetime
 tt = os.cpu_count() or 1
 
 llm = Llama(
-    model_path="mistralai_Mistral-Small-3.1-24B-Instruct-2503-IQ2_XXS.gguf",
+    model_path="Ministral-8B-Instruct-2410-Q8_0.gguf",
     n_ctx=2048,
-    n_gpu_layers=8,
+    n_gpu_layers=50,
     n_threads=tt,
     verbose=False,
+    n_batch=64,
     chat_format="chatml-instruct"
 )
+
+_ = llm("Hola", max_tokens=1, echo=False)  # warm-up rápido
+
 
 ARCHIVO_MEMORIA = "memoria.json"
 PUERTO_CHAT = 5050
