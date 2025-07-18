@@ -1,3 +1,8 @@
+
+# Añade que lea menos respuesta y preguntas de las conversaciones anteriores en vez de 20 leer 5 anteriores y guardar la fecha junto a la pregunta para que, cuando pase un tiempo, ir borrando
+# que si el usuario le pregunta por conversaciones antiguas, pueda buscar información de las respuestas anteriores ha las 5 ultimas
+# Añade que coja la información importante como el nombre del usuario y otros datos que considere importantes y los guarde en otro archivo para que los recuerde y pueda usar
+
 import socket
 import json
 import os
