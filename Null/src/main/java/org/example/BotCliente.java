@@ -57,8 +57,8 @@ public class BotCliente {
         // Mistral-Nemo-12B-Instruct-2407-Q4_K_M                /5   00:36   no sabe                                  6
 
         // Ultimas pruebas
-        // Mistral model .gguf                               haciertos    tempo   top
-        // Ministral-8B-Instruct-2410-Q8_0                      4/7        01:38        // solid fayo
+        // Mistral model .gguf                               haciertos    tempo
+        // Ministral-8B-Instruct-2410-Q8_0                      4/7        01:38  02:18 con sentimientos      // solid fayo
         // Mistral-7B-Instruct-v0.3-Q4_K_M                      4/7        02:59
         // mistralai_Mistral-Small-3.1-24B-Instruct-2503-Q4_K_M 4/7        04:41
         // mistralai_Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S 5/7        04:59
