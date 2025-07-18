@@ -79,7 +79,7 @@ public class BotCliente {
         String respuesta7 = preguntarAlBot("Creame un programa de Java que imprima 'Hola Mundo' en la consola"); // programa
         System.out.println("Bot: "+" 5 " + respuesta7);
 
-        String respuesta8 = preguntarAlBot("quien escribio el libro de los principios solid"); // Robert C. Martin
+        String respuesta8 = preguntarAlBot("Quién escribió los principios SOLID"); // Robert C. Martin
         System.out.println("Bot: "+" 6 " + respuesta8);
 
         String respuesta9 = preguntarAlBot("Eugenio murió después de una larga vida de 87 años, pero en su tumba escribieron el siguiente epitafio: “Eugenio vivió una buena y larga vida – Él amaba a sus hijo y a su bella esposa –Él era bueno, generoso y merecía lo mejor – Aunque solo tuviera 21 cumpleaños.”¿Cómo es posible esto?");
