@@ -1,7 +1,18 @@
+# limitar uso de cpu ha lo que uno quiera que haya una bariable que te permita configurar el uso de cpu
+# cojer el nonbre de la mascota del harchibo de el java de configuracion del config.txt
+"""
+Estructurado de la sigiente manera
 
-# Añade que lea menos respuesta y preguntas de las conversaciones anteriores en vez de 20 leer 5 anteriores y guardar la fecha junto a la pregunta para que, cuando pase un tiempo, ir borrando hademas que guarde el tema del recuerdo
-# Haz que si el usuario le pregunta por conversaciones antiguas o un tema, pueda buscar max información que las respuestas anteriores ha las 5 ultimas sino entre todas
-# Añade que coja la información importante como el nombre del usuario y otros datos que considere importantes sobre el usuario y los guarde en otro archivo para que los recuerde y pueda usar
+FELICIDAD=0
+ENFADO=0
+EDAD_MASCOTA_DIAS=27
+NOMBRE_MASCOTA=NULL
+GANAS_DE_JUGAR=0
+TRISTEZA=0
+ultimaEjecucion=2025-07-15
+SALUD=0
+
+"""
 
 import socket
 import json

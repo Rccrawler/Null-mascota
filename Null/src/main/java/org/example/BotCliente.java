@@ -35,7 +35,7 @@ public class BotCliente {
 
         String respuesta2 = preguntarAlBot("¿Quien te ha puesto ese nonbre?");
         System.out.println("Bot: " + respuesta2);
-        
+
 
         if (probar_modelos){
             // añadir limite de uso de cpu o grafica demasiada tenperatura
