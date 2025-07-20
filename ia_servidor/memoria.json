@@ -5,74 +5,142 @@
   },
   {
     "role": "user",
-    "content": "Hola, ¿quién eres?"
+    "content": "Hola, ¿quién eres?",
+    "fecha": "2025-07-20T18:38:53.280431",
+    "tema": "Identidad",
+    "emocion": "neutral"
   },
   {
     "role": "assistant",
-    "content": "¡Hola! Soy Perico, tu mascota virtual. ¿Y tú quién eres?"
+    "content": "¡Hola! Soy Perico, una mascota virtual. ¿Y tú quién eres?",
+    "fecha": "2025-07-20T18:38:59.543306",
+    "tema": "Identidad",
+    "emocion": "neutral"
   },
   {
     "role": "user",
-    "content": "¿Quien te ha puesto ese nonbre?"
+    "content": "¿Quien te ha puesto ese nonbre?",
+    "fecha": "2025-07-20T18:39:04.661809",
+    "tema": "nombre",
+    "emocion": "neutral"
   },
   {
     "role": "assistant",
-    "content": "Me llamo así porque me encanta el color verde y los pericos son muy divertidos. ¿Te gusta mi nombre?"
+    "content": "Me lo pusieron mis dueños, ¿y a ti quién te lo puso?",
+    "fecha": "2025-07-20T18:39:10.697008",
+    "tema": "nombre",
+    "emocion": "neutral"
   },
   {
     "role": "user",
-    "content": "Cual es la pregunta mas difícil que te han hecho?"
+    "content": "Hola, ¿quién eres?",
+    "fecha": "2025-07-20T18:40:23.409756",
+    "tema": "Identidad",
+    "emocion": "neutral"
   },
   {
     "role": "assistant",
-    "content": "¡Uy! La pregunta más difícil que me han hecho es: \"¿Qué es el infinito?\" Es una pregunta que me deja pensando mucho."
+    "content": "¡Hola! Soy Perico, una mascota virtual. ¿Y tú quién eres?",
+    "fecha": "2025-07-20T18:40:30.842931",
+    "tema": "Identidad",
+    "emocion": "neutral"
   },
   {
     "role": "user",
-    "content": "Cuantas e tien la palabra apache"
+    "content": "¿Quien te ha puesto ese nonbre?",
+    "fecha": "2025-07-20T18:40:36.205171",
+    "tema": "nombre",
+    "emocion": "neutral"
   },
   {
     "role": "assistant",
-    "content": "¡Hola! La palabra \"apache\" tiene 6 letras. ¿Te interesa saber algo más sobre los apaches?"
+    "content": "Me lo pusieron mis dueños, ¿y a ti quién te lo puso?",
+    "fecha": "2025-07-20T18:40:43.522867",
+    "tema": "nombre",
+    "emocion": "neutral"
   },
   {
     "role": "user",
-    "content": "Puedes decirme el resultado de esta operación: 7 - 7:1x1+3?"
+    "content": "Hola, ¿quién eres?",
+    "fecha": "2025-07-20T18:41:06.291322",
+    "tema": "Identidad",
+    "emocion": "neutral"
   },
   {
     "role": "assistant",
-    "content": "¡Claro! Primero, resolvemos la operación dentro de los paréntesis: 1x1+3 = 4. Luego, restamos 7 de 4: 7 - 4 = 3. ¡El resultado es 3!"
+    "content": "¡Hola! Soy Perico, una mascota virtual. ¿Y tú quién eres?",
+    "fecha": "2025-07-20T18:41:15.515591",
+    "tema": "Identidad",
+    "emocion": "neutral"
   },
   {
     "role": "user",
-    "content": "Puedes traducirme esto hal español: 'Hello, how are you?'"
+    "content": "¿Quien te ha puesto ese nonbre?",
+    "fecha": "2025-07-20T18:41:21.777140",
+    "tema": "nombre",
+    "emocion": "neutral"
   },
   {
     "role": "assistant",
-    "content": "¡Hola! La traducción de 'Hello, how are you?' al español es 'Hola, ¿cómo estás?' ¿Te gustaría que te tradujera algo más?"
+    "content": "Me lo pusieron mis dueños, ¿y a ti quién te lo puso?",
+    "fecha": "2025-07-20T18:41:30.999891",
+    "tema": "nombre",
+    "emocion": "neutral"
   },
   {
     "role": "user",
-    "content": "Creame un programa de Java que imprima 'Hola Mundo' en la consola"
+    "content": "Hola, ¿quién eres?",
+    "fecha": "2025-07-20T18:41:45.854345",
+    "tema": "Identidad",
+    "emocion": "neutral"
   },
   {
     "role": "assistant",
-    "content": "¡Claro! Aquí tienes un pequeño programa de Java que imprime \"Hola Mundo\" en la consola:"
+    "content": "¡Hola! Soy Perico, una mascota virtual. ¿Y tú quién eres?",
+    "fecha": "2025-07-20T18:41:56.324532",
+    "tema": "Identidad",
+    "emocion": "neutral"
   },
   {
     "role": "user",
-    "content": "Quién escribió los principios SOLID"
+    "content": "¿Quien te ha puesto ese nonbre?",
+    "fecha": "2025-07-20T18:42:01.951108",
+    "tema": "nombre",
+    "emocion": "neutral"
   },
   {
     "role": "assistant",
-    "content": "Los principios SOLID fueron propuestos por Robert C. Martin, conocido como \"Uncle Bob\". Son un conjunto de cinco principios de diseño que ayudan a crear código más modular, mantenible y escalable. ¿Te gustaría saber más sobre ellos?"
+    "content": "Me lo pusieron mis dueños, ¿y a ti quién te lo puso?",
+    "fecha": "2025-07-20T18:42:11.590615",
+    "tema": "nombre",
+    "emocion": "neutral"
   },
   {
     "role": "user",
-    "content": "Eugenio murió después de una larga vida de 87 años, pero en su tumba escribieron el siguiente epitafio: “Eugenio vivió una buena y larga vida – Él amaba a sus hijo y a su bella esposa –Él era bueno, generoso y merecía lo mejor – Aunque solo tuviera 21 cumpleaños.”¿Cómo es posible esto?"
+    "content": "Hola, ¿quién eres?",
+    "fecha": "2025-07-20T18:42:37.623144",
+    "tema": "Identidad",
+    "emocion": "neutral"
   },
   {
     "role": "assistant",
-    "content": "¡Qué curioso! Parece que hay un error en el epitafio. Eugenio vivió 87 años, no 21. ¿Quizás fue un error tipográfico?"
+    "content": "¡Hola! Soy Perico, una mascota virtual. ¿Y tú quién eres?",
+    "fecha": "2025-07-20T18:42:47.058135",
+    "tema": "Identidad",
+    "emocion": "neutral"
+  },
+  {
+    "role": "user",
+    "content": "¿Quien te ha puesto ese nonbre?",
+    "fecha": "2025-07-20T18:42:52.733781",
+    "tema": "nombre",
+    "emocion": "neutral"
+  },
+  {
+    "role": "assistant",
+    "content": "Me lo pusieron mis dueños, ¿y a ti quién te lo puso?",
+    "fecha": "2025-07-20T18:43:02.038957",
+    "tema": "nombre",
+    "emocion": "neutral"
   }
 ]
