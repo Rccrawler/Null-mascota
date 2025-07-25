@@ -1,9 +1,13 @@
 package org.example;
 
+import org.json.JSONObject;
 import utiles.TimerUtil;
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.util.Scanner;
 
 public class BotCliente {
@@ -30,12 +34,25 @@ public class BotCliente {
 
         timer.start();
 
-        String respuesta1 = preguntarAlBot("Hola, ¿quién eres?");
-        System.out.println("Bot: " + respuesta1);
+        // primera pregunta
+        String jsonRespuesta1 = preguntarAlBot("Hola, ¿quién eres?");
+        JSONObject obj1 = new JSONObject(jsonRespuesta1); // 1. Parsear la cadena JSON a un objeto
 
-        String respuesta2 = preguntarAlBot("¿Quien te ha puesto ese nonbre?");
-        System.out.println("Bot: " + respuesta2);
+        String textoRespuesta1 = obj1.getString("respuesta"); // 2. Extraer el texto de la respuesta
+        String sentimiento1 = obj1.getString("sentimiento"); // 3. Extraer el sentimiento
 
+        System.out.println("Bot: " + textoRespuesta1); // Imprime el texto corregido
+        System.out.println("(Sentimiento detectado: " + sentimiento1 + ")"); // Imprime el sentimiento
+
+        // segunada peregunta
+        String jsonRespuesta2 = preguntarAlBot("¿Quien te ha puesto ese nonbre?");
+        JSONObject obj2 = new JSONObject(jsonRespuesta2);
+
+        String textoRespuesta2 = obj2.getString("respuesta");
+        String sentimiento2 = obj2.getString("sentimiento");
+
+        System.out.println("Bot: " + textoRespuesta2);
+        System.out.println("(Sentimiento detectado: " + sentimiento2 + ")");
 
         if (probar_modelos){
             // añadir limite de uso de cpu o grafica demasiada tenperatura
@@ -68,26 +85,75 @@ public class BotCliente {
             // mistralai_Mistral-Small-3.1-24B-Instruct-2503-Q4_K_S 5/7        04:59
 
             // Probamos la calidad del bot con una pregunta difícil
-            String respuesta3 = preguntarAlBot("Cual es la pregunta mas difícil que te han hecho?"); // respuesta larga
-            System.out.println("Bot: "+" 1 " + respuesta3);
+            // tercera peregunta
+            String jsonRespuesta3 = preguntarAlBot("Cual es la pregunta mas difícil que te han hecho?"); // respuesta larga
+            JSONObject obj3 = new JSONObject(jsonRespuesta3);
 
-            String respuesta4 = preguntarAlBot("Cuantas e tien la palabra apache"); // tiene una e
-            System.out.println("Bot: "+" 2 " + respuesta4);
+            String textoRespuesta3 = obj3.getString("respuesta");
+            String sentimiento3 = obj3.getString("sentimiento");
 
-            String respuesta5 = preguntarAlBot("Puedes decirme el resultado de esta operación: 7 - 7:1x1+3?"); //7 - 7 = 0 0 + 3 = 3
-            System.out.println("Bot: "+" 3 " + respuesta5);
+            System.out.println("Bot: " + textoRespuesta3);
+            System.out.println("(Sentimiento detectado: " + sentimiento3 + ")");
 
-            String respuesta6 = preguntarAlBot("Puedes traducirme esto hal español: 'Hello, how are you?'"); //Hola, cómo estás
-            System.out.println("Bot: "+" 4 " + respuesta6);
+            // cuarta pregunta
+            String jsonRespuesta4 = preguntarAlBot("Cuantas e tien la palabra apache"); // tiene una e
+            JSONObject obj4 = new JSONObject(jsonRespuesta4);
 
-            String respuesta7 = preguntarAlBot("Creame un programa de Java que imprima 'Hola Mundo' en la consola"); // programa
-            System.out.println("Bot: "+" 5 " + respuesta7);
+            String textoRespuesta4 = obj4.getString("respuesta");
+            String sentimiento4 = obj4.getString("sentimiento");
 
-            String respuesta8 = preguntarAlBot("Quién escribió los principios SOLID"); // Robert C. Martin
-            System.out.println("Bot: "+" 6 " + respuesta8);
+            System.out.println("Bot: " + textoRespuesta4);
+            System.out.println("(Sentimiento detectado: " + sentimiento4 + ")");
 
-            String respuesta9 = preguntarAlBot("Eugenio murió después de una larga vida de 87 años, pero en su tumba escribieron el siguiente epitafio: “Eugenio vivió una buena y larga vida – Él amaba a sus hijo y a su bella esposa –Él era bueno, generoso y merecía lo mejor – Aunque solo tuviera 21 cumpleaños.”¿Cómo es posible esto?");
-            System.out.println("Bot: "+" 7 " + respuesta9); //Respuesta: Eugenio nació el 29 de febrero en unaño bisiesto. Consecuentemente, a sus 87 años, solo tuvo 21 cumpleaños. En los demás años no hubo un 29 de febrero.>"""
+            // quinta pregunta
+            String jsonRespuesta5 = preguntarAlBot("Puedes decirme el resultado de esta operación: 7 - 7:1x1+3?"); //7 - 7 = 0 0 + 3 = 3
+            JSONObject obj5 = new JSONObject(jsonRespuesta5);
+
+            String textoRespuesta5 = obj5.getString("respuesta");
+            String sentimiento5 = obj5.getString("sentimiento");
+
+            System.out.println("Bot: " + textoRespuesta5);
+            System.out.println("(Sentimiento detectado: " + sentimiento5 + ")");
+
+            // sexta pregunta
+            String jsonRespuesta6 = preguntarAlBot("Puedes traducirme esto hal español: 'Hello, how are you?'"); //Hola, cómo estás
+            JSONObject obj6 = new JSONObject(jsonRespuesta6);
+
+            String textoRespuesta6 = obj6.getString("respuesta");
+            String sentimiento6 = obj6.getString("sentimiento");
+
+            System.out.println("Bot: " + textoRespuesta6);
+            System.out.println("(Sentimiento detectado: " + sentimiento6 + ")");
+
+            // setima pregunta
+            String jsonRespuesta7 = preguntarAlBot("Creame un programa de Java que imprima 'Hola Mundo' en la consola"); // programa
+            JSONObject obj7 = new JSONObject(jsonRespuesta7);
+
+            String textoRespuesta7 = obj7.getString("respuesta");
+            String sentimiento7 = obj7.getString("sentimiento");
+
+            System.out.println("Bot: " + textoRespuesta7);
+            System.out.println("(Sentimiento detectado: " + sentimiento7 + ")");
+
+            // octaba pregunta
+            String jsonRespuesta8 = preguntarAlBot("Quién escribió los principios SOLID"); // Robert C. Martin
+            JSONObject obj8 = new JSONObject(jsonRespuesta8);
+
+            String textoRespuesta8 = obj8.getString("respuesta");
+            String sentimiento8 = obj8.getString("sentimiento");
+
+            System.out.println("Bot: " + textoRespuesta8);
+            System.out.println("(Sentimiento detectado: " + sentimiento8 + ")");
+
+            // nobena pregunta
+            String jsonRespuesta9 = preguntarAlBot("Eugenio murió después de una larga vida de 87 años, pero en su tumba escribieron el siguiente epitafio: “Eugenio vivió una buena y larga vida – Él amaba a sus hijo y a su bella esposa –Él era bueno, generoso y merecía lo mejor – Aunque solo tuviera 21 cumpleaños.”¿Cómo es posible esto?");
+            JSONObject obj9 = new JSONObject(jsonRespuesta9); //Respuesta: Eugenio nació el 29 de febrero en unaño bisiesto. Consecuentemente, a sus 87 años, solo tuvo 21 cumpleaños. En los demás años no hubo un 29 de febrero.>"""
+
+            String textoRespuesta9 = obj9.getString("respuesta");
+            String sentimiento9 = obj9.getString("sentimiento");
+
+            System.out.println("Bot: " + textoRespuesta9);
+            System.out.println("(Sentimiento detectado: " + sentimiento9 + ")");
         }
 
         timer.stop();

@@ -142,5 +142,103 @@
     "fecha": "2025-07-20T18:43:02.038957",
     "tema": "nombre",
     "emocion": "neutral"
+  },
+  {
+    "role": "user",
+    "content": "Hola, ¿quién eres?",
+    "fecha": "2025-07-25T18:02:36.865429",
+    "tema": "Identidad",
+    "emocion": "neutral"
+  },
+  {
+    "role": "assistant",
+    "content": "¡Hola! Soy Perico, una mascota virtual. ¿Y tú quién eres?",
+    "fecha": "2025-07-25T18:02:46.536448",
+    "tema": "Identidad",
+    "emocion": "neutral"
+  },
+  {
+    "role": "user",
+    "content": "Hola, ¿quién eres?",
+    "fecha": "2025-07-25T18:14:47.803086",
+    "tema": "Identidad",
+    "emocion": "neutral"
+  },
+  {
+    "role": "assistant",
+    "content": "¡Hola! Soy Perico, una mascota virtual. ¿Y tú quién eres?",
+    "fecha": "2025-07-25T18:14:57.491156",
+    "tema": "Identidad",
+    "emocion": "neutral"
+  },
+  {
+    "role": "user",
+    "content": "¿Quien te ha puesto ese nonbre?",
+    "fecha": "2025-07-25T18:15:03.038064",
+    "tema": "nombre",
+    "emocion": "neutral"
+  },
+  {
+    "role": "assistant",
+    "content": "Me lo pusieron mis dueños, ¿y a ti quién te lo puso?",
+    "fecha": "2025-07-25T18:15:13.159713",
+    "tema": "nombre",
+    "emocion": "neutral"
+  },
+  {
+    "role": "user",
+    "content": "Hola, ¿quién eres?",
+    "fecha": "2025-07-25T18:40:56.322375",
+    "tema": "Identidad",
+    "emocion": "neutral"
+  },
+  {
+    "role": "assistant",
+    "content": "¡Hola! Soy Perico, una mascota virtual. ¿Y tú quién eres?",
+    "fecha": "2025-07-25T18:41:06.559684",
+    "tema": "Identidad",
+    "emocion": "neutral"
+  },
+  {
+    "role": "user",
+    "content": "¿Quien te ha puesto ese nonbre?",
+    "fecha": "2025-07-25T18:41:12.524325",
+    "tema": "nombre",
+    "emocion": "neutral"
+  },
+  {
+    "role": "assistant",
+    "content": "Me lo pusieron mis dueños, ¿y a ti quién te lo puso?",
+    "fecha": "2025-07-25T18:41:21.988578",
+    "tema": "nombre",
+    "emocion": "neutral"
+  },
+  {
+    "role": "user",
+    "content": "Hola, ¿quién eres?",
+    "fecha": "2025-07-25T18:45:07.049382",
+    "tema": "Identidad",
+    "emocion": "neutral"
+  },
+  {
+    "role": "assistant",
+    "content": "¡Hola! Soy Perico, una mascota virtual. ¿Y tú quién eres?",
+    "fecha": "2025-07-25T18:45:17.000240",
+    "tema": "Identidad",
+    "emocion": "neutral"
+  },
+  {
+    "role": "user",
+    "content": "¿Quien te ha puesto ese nonbre?",
+    "fecha": "2025-07-25T18:45:22.818461",
+    "tema": "nombre",
+    "emocion": "neutral"
+  },
+  {
+    "role": "assistant",
+    "content": "Me lo pusieron mis dueños, ¿y a ti quién te lo puso?",
+    "fecha": "2025-07-25T18:45:32.462435",
+    "tema": "nombre",
+    "emocion": "neutral"
   }
 ]
