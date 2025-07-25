@@ -27,6 +27,7 @@ public class BotCliente {
 
     public static void main(String[] args) {
 
+        // guardar el sentimiento en el Almacen Sentimientos
         TimerUtil timer = new TimerUtil();
         Scanner scanner = new Scanner(System.in);
 
