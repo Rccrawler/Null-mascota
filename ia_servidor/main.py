@@ -1,14 +1,17 @@
 # limitar uso de cpu ha lo que uno quiera que haya una bariable que te permita configurar el uso de cpu
-# cojer el nonbre de la mascota del harchibo de el java de configuracion del config.txt
 """
+ahora necesito coger el nombre de la mascota desde otro lado del archivo de config.txt en NOMBRE_MASCOTA
+
+y coger también estado de stado_emocional para que empiece con una emoción o otra
+
+pero que no escriba nada en el config.txt que de eso ya se encarga otro programa
+ 
 Estructurado de la sigiente manera
 
-FELICIDAD=0
-ENFADO=0
+ESTADO_EMOCIONAL=alegre
 EDAD_MASCOTA_DIAS=27
 NOMBRE_MASCOTA=NULL
 GANAS_DE_JUGAR=0
-TRISTEZA=0
 ultimaEjecucion=2025-07-15
 SALUD=0
 
