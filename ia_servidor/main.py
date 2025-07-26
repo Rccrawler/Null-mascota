@@ -1,20 +1,3 @@
-# limitar uso de cpu ha lo que uno quiera que haya una bariable que te permita configurar el uso de cpu
-"""
-dame solo el codigo para inplementar
-coger el nombre de la mascota desde otro lado, del archivo de config.txt en NOMBRE_MASCOTA
-
-pero que no escriba nada en el config.txt que de eso ya se encarga otro programa
- 
-Estructurado de la sigiente manera
-
-EDAD_MASCOTA_DIAS=27
-NOMBRE_MASCOTA=NULL
-GANAS_DE_JUGAR=0
-ultimaEjecucion=2025-07-15
-SALUD=0
-
-"""
-
 import socket
 import json
 import os
@@ -142,7 +125,7 @@ emocion_actual = cargar_estado_emocional()
 def get_memoria_inicial():
     return [
         {"role": "system", "content": (
-            f"Eres {nombre_mascota}, una asistente virtual simpática y fiel que vive dentro de una mascota virtual. "
+            f"Eres {nombre_mascota}, una mascota virtual simpática y fiel que vive dentro de un ordenador. "
             "Habla de forma cercana, natural y muy concisa. RESPONDE SOLO EN ESPAÑOL."
         )}
     ]
@@ -174,11 +157,14 @@ def ajustar_temperature(texto):
 
 def detectar_sentimiento(texto_usuario):
     prompt_sentimiento = (
+        f"Eres una IA emocional que evalúa cómo se siente la mascota virtual {nombre_mascota}\n"
         f"Clasifica el estado emocional del siguiente mensaje como una sola palabra entre: {', '.join(EMOCIONES)}.\n"
+        "Devuelve SOLO y EXACTAMENTE una de estas palabras, sin comillas ni nada más:\n"
+        f"{', '.join(EMOCIONES)}\n\n"
         f"Mensaje: {texto_usuario}\n"
         f"Emoción:"
     )
-    salida = llm(prompt_sentimiento, max_tokens=1, temperature=0.0, echo=False)
+    salida = llm(prompt_sentimiento, max_tokens=2, temperature=0.3, echo=False)
     emocion = salida["choices"][0]["text"].strip().lower()
     if emocion not in EMOCIONES:
         emocion = "neutral"

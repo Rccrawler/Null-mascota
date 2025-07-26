@@ -28,6 +28,11 @@ public class BotCliente {
 
     public static void main(String[] args) {
 
+        LectorConfiguraciones config = new LectorConfiguraciones("config.txt");
+        String nombreMascota = config.obtenerVariable("NOMBRE_MASCOTA");
+
+        System.out.println("Nombre de la mascota: " + nombreMascota);
+
         AlmacenSentimientos AlmacenSentimientos = new AlmacenSentimientos();
         TimerUtil timer = new TimerUtil();
         Scanner scanner = new Scanner(System.in);
@@ -45,17 +50,17 @@ public class BotCliente {
         String textoRespuesta1 = obj1.getString("respuesta"); // 2. Extraer el texto de la respuesta
         sentimiento = obj1.getString("sentimiento"); // 3. Extraer el sentimiento
 
-        System.out.println("Bot: " + textoRespuesta1); // Imprime el texto corregido
+        System.out.println(nombreMascota + ": " + textoRespuesta1); // Imprime el texto corregido
         System.out.println("(Sentimiento detectado: " + sentimiento + ")"); // Imprime el sentimiento
 
         // segunada peregunta
-        String jsonRespuesta2 = preguntarAlBot("¿cual es la pregunta mas deificil que te han echo?");
+        String jsonRespuesta2 = preguntarAlBot("¿cual es el momento mas felic de tu vida?");
         JSONObject obj2 = new JSONObject(jsonRespuesta2);
 
         String textoRespuesta2 = obj2.getString("respuesta");
         sentimiento = obj2.getString("sentimiento");
 
-        System.out.println("Bot: " + textoRespuesta2);
+        System.out.println(nombreMascota + ": " + textoRespuesta2);
         System.out.println("(Sentimiento detectado: " + sentimiento + ")");
 
         int estadoEmocional;
@@ -127,7 +132,7 @@ public class BotCliente {
             String textoRespuesta3 = obj3.getString("respuesta");
             String sentimiento3 = obj3.getString("sentimiento");
 
-            System.out.println("Bot: " + textoRespuesta3);
+            System.out.println(nombreMascota + ": " + textoRespuesta3);
             System.out.println("(Sentimiento detectado: " + sentimiento3 + ")");
 
             // cuarta pregunta
@@ -137,7 +142,7 @@ public class BotCliente {
             String textoRespuesta4 = obj4.getString("respuesta");
             String sentimiento4 = obj4.getString("sentimiento");
 
-            System.out.println("Bot: " + textoRespuesta4);
+            System.out.println(nombreMascota + ": " + textoRespuesta4);
             System.out.println("(Sentimiento detectado: " + sentimiento4 + ")");
 
             // quinta pregunta
@@ -147,7 +152,7 @@ public class BotCliente {
             String textoRespuesta5 = obj5.getString("respuesta");
             String sentimiento5 = obj5.getString("sentimiento");
 
-            System.out.println("Bot: " + textoRespuesta5);
+            System.out.println(nombreMascota + ": " + textoRespuesta5);
             System.out.println("(Sentimiento detectado: " + sentimiento5 + ")");
 
             // sexta pregunta
@@ -157,7 +162,7 @@ public class BotCliente {
             String textoRespuesta6 = obj6.getString("respuesta");
             String sentimiento6 = obj6.getString("sentimiento");
 
-            System.out.println("Bot: " + textoRespuesta6);
+            System.out.println(nombreMascota + ": " + textoRespuesta6);
             System.out.println("(Sentimiento detectado: " + sentimiento6 + ")");
 
             // setima pregunta
@@ -167,7 +172,7 @@ public class BotCliente {
             String textoRespuesta7 = obj7.getString("respuesta");
             String sentimiento7 = obj7.getString("sentimiento");
 
-            System.out.println("Bot: " + textoRespuesta7);
+            System.out.println(nombreMascota + ": " + textoRespuesta7);
             System.out.println("(Sentimiento detectado: " + sentimiento7 + ")");
 
             // octaba pregunta
@@ -177,7 +182,7 @@ public class BotCliente {
             String textoRespuesta8 = obj8.getString("respuesta");
             String sentimiento8 = obj8.getString("sentimiento");
 
-            System.out.println("Bot: " + textoRespuesta8);
+            System.out.println(nombreMascota + ": " + textoRespuesta8);
             System.out.println("(Sentimiento detectado: " + sentimiento8 + ")");
 
             // nobena pregunta
@@ -187,7 +192,7 @@ public class BotCliente {
             String textoRespuesta9 = obj9.getString("respuesta");
             String sentimiento9 = obj9.getString("sentimiento");
 
-            System.out.println("Bot: " + textoRespuesta9);
+            System.out.println(nombreMascota + ": " + textoRespuesta9);
             System.out.println("(Sentimiento detectado: " + sentimiento9 + ")");
         }
 
