@@ -1,1 +1,9 @@
-que en local se pase ha los ordenadores de halado ho hal contrario
+que cuando se baya la mascota salga bien con el icono de la estrya
+que se pueda mober la mascota eya sola por la pantalla
+que canbie la imanejen segun las emociones del chat
+cojer datos de fuera del chat y entregarselos ha la ia que lo mande hal chat
+que los mesajes emergentes sehan notificaciones solas de la ia que se escriban
+hacer instalador
+hacer requeriments.txt
+hareglar redmi
+
