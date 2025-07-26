@@ -234,7 +234,13 @@ public class MascotaDesktop {
 
         menu.add("Jugar");
 
-        menu.add("Ablar");
+        JMenuItem itemAblar = new JMenuItem("Ablar");
+        itemAblar.addActionListener(e -> {
+            VentanaChat chat = new VentanaChat(NOMBRE_MASCOTA);
+            chat.setVisible(true);
+        });
+        menu.add(itemAblar);
+
 
         menu.addSeparator();
 

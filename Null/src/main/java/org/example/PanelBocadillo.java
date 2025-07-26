@@ -15,7 +15,7 @@ public class PanelBocadillo extends JPanel {
         setOpaque(false); // Hacemos el panel transparente
 
         // Cargamos la imagen del bocadillo
-        URL urlImagen = getClass().getResource("/iconos/bocadillo.png");
+        URL urlImagen = getClass().getResource("/iconos/bocadillo-comic.png");
         if (urlImagen != null) {
             try {
                 imagenFondo = ImageIO.read(urlImagen);
