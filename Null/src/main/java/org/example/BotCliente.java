@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class BotCliente {
+
     public static String preguntarAlBot(String mensaje) {
         try (Socket socket = new Socket("localhost", 5050)) {
             OutputStream os = socket.getOutputStream();
@@ -27,7 +28,7 @@ public class BotCliente {
 
     public static void main(String[] args) {
 
-        // guardar el sentimiento en el Almacen Sentimientos
+        AlmacenSentimientos AlmacenSentimientos = new AlmacenSentimientos();
         TimerUtil timer = new TimerUtil();
         Scanner scanner = new Scanner(System.in);
 
@@ -35,25 +36,58 @@ public class BotCliente {
 
         timer.start();
 
+        String sentimiento;
+
         // primera pregunta
-        String jsonRespuesta1 = preguntarAlBot("Hola, ¿quién eres?");
+        String jsonRespuesta1 = preguntarAlBot("como te llamas");
         JSONObject obj1 = new JSONObject(jsonRespuesta1); // 1. Parsear la cadena JSON a un objeto
 
         String textoRespuesta1 = obj1.getString("respuesta"); // 2. Extraer el texto de la respuesta
-        String sentimiento1 = obj1.getString("sentimiento"); // 3. Extraer el sentimiento
+        sentimiento = obj1.getString("sentimiento"); // 3. Extraer el sentimiento
 
         System.out.println("Bot: " + textoRespuesta1); // Imprime el texto corregido
-        System.out.println("(Sentimiento detectado: " + sentimiento1 + ")"); // Imprime el sentimiento
+        System.out.println("(Sentimiento detectado: " + sentimiento + ")"); // Imprime el sentimiento
 
         // segunada peregunta
-        String jsonRespuesta2 = preguntarAlBot("¿Quien te ha puesto ese nonbre?");
+        String jsonRespuesta2 = preguntarAlBot("¿cual es la pregunta mas deificil que te han echo?");
         JSONObject obj2 = new JSONObject(jsonRespuesta2);
 
         String textoRespuesta2 = obj2.getString("respuesta");
-        String sentimiento2 = obj2.getString("sentimiento");
+        sentimiento = obj2.getString("sentimiento");
 
         System.out.println("Bot: " + textoRespuesta2);
-        System.out.println("(Sentimiento detectado: " + sentimiento2 + ")");
+        System.out.println("(Sentimiento detectado: " + sentimiento + ")");
+
+        int estadoEmocional;
+        if (sentimiento.equals("neutral")) {
+            estadoEmocional = 0;
+        } else if (sentimiento.equals("alegre")) {
+            estadoEmocional = 1;
+        } else if (sentimiento.equals("triste")) {
+            estadoEmocional = 2;
+        } else if (sentimiento.equals("enfadado")) {
+            estadoEmocional = 3;
+        } else if (sentimiento.equals("euforico")) {
+            estadoEmocional = 4;
+        } else if (sentimiento.equals("ansioso")) {
+            estadoEmocional = 5;
+        } else if (sentimiento.equals("esperanzado")) {
+            estadoEmocional = 6;
+        } else if (sentimiento.equals("decepcionado")) {
+            estadoEmocional = 7;
+        } else if (sentimiento.equals("calmado")) {
+            estadoEmocional = 8;
+        } else if (sentimiento.equals("furioso")) {
+            estadoEmocional = 9;
+        } else if (sentimiento.equals("sorprendido")) {
+            estadoEmocional = 10;
+        } else if (sentimiento.equals("frustrado")) {
+            estadoEmocional = 11;
+        } else {
+            estadoEmocional = 0;
+        }
+        AlmacenSentimientos.setESTADO_EMOCIONAL(estadoEmocional);
+        AlmacenSentimientos.guardarSentimientos();
 
         if (probar_modelos){
             // añadir limite de uso de cpu o grafica demasiada tenperatura
