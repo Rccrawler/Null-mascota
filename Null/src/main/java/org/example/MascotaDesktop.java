@@ -23,6 +23,7 @@ public class MascotaDesktop {
     // Solo necesitamos UNA instancia del panel de la mascota y UNA del bocadillo
     static PanelPersonaje panelMascota = new PanelPersonaje(RUTA_IMAGEN_INICIAL);
     static PanelBocadillo panelBocadillo = new PanelBocadillo();
+    private static JFrame frame; // Hacer frame un campo de clase
 
     public static void main(String[] args) {
         // --- INICIALIZACIÓN ---
@@ -34,6 +35,56 @@ public class MascotaDesktop {
         SwingUtilities.invokeLater(MascotaDesktop::crearYMostrarGui);
         iniciarAnimacion();
         iniciarPensamientos();
+        iniciarMovimientoAutonomo();
+    }
+
+    private static void iniciarMovimientoAutonomo() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    // Pausa aleatoria para que el movimiento no sea constante
+                    Thread.sleep(5000 + (long) (Math.random() * 10000));
+
+                    // Solo se mueve si tiene ganas de jugar
+                    if (sentimientos.getGANAS_DE_JUGAR() == 1) {
+                        SwingUtilities.invokeLater(() -> {
+                            if (frame != null) {
+                                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                                int screenWidth = screenSize.width;
+                                int screenHeight = screenSize.height;
+
+                                Point currentLocation = frame.getLocation();
+                                int targetX = (int) (Math.random() * (screenWidth - frame.getWidth()));
+                                int targetY = (int) (Math.random() * (screenHeight - frame.getHeight()));
+
+                                moverSuavemente(currentLocation, new Point(targetX, targetY));
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private static void moverSuavemente(Point desde, Point hasta) {
+        new Thread(() -> {
+            int dx = hasta.x - desde.x;
+            int dy = hasta.y - desde.y;
+            int steps = 100; // Número de pasos para el movimiento
+
+            for (int i = 0; i <= steps; i++) {
+                int newX = desde.x + (dx * i) / steps;
+                int newY = desde.y + (dy * i) / steps;
+                SwingUtilities.invokeLater(() -> frame.setLocation(newX, newY));
+                try {
+                    Thread.sleep(20); // Pequeña pausa para que el movimiento sea visible
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     private static void actualizarEdad(LectorConfiguraciones config) {
@@ -157,7 +208,7 @@ public class MascotaDesktop {
 
     private static void crearYMostrarGui() {
         // --- 1. CREACIÓN Y CONFIGURACIÓN DE LA VENTANA PRINCIPAL (JFrame) ---
-        JFrame frame = new JFrame();
+        frame = new JFrame(); // Asignar al campo de clase
         frame.setSize(200, ALTO_MASCOTA + 50); // Tamaño total para mascota y bocadillo
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setUndecorated(true);
@@ -205,6 +256,10 @@ public class MascotaDesktop {
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (initialClick[0] == null) return;
+                // Detener el movimiento autónomo si el usuario arrastra la mascota
+                if (sentimientos.getGANAS_DE_JUGAR() == 1) {
+                    // Podríamos añadir una lógica para detener temporalmente el hilo de movimiento
+                }
                 int xOnScreen = e.getXOnScreen();
                 int yOnScreen = e.getYOnScreen();
                 frame.setLocation(xOnScreen - initialClick[0].x, yOnScreen - initialClick[0].y);

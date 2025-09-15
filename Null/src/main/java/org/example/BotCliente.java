@@ -64,32 +64,19 @@ public class BotCliente {
         System.out.println("(Sentimiento detectado: " + sentimiento + ")");
 
         int estadoEmocional;
-        if (sentimiento.equals("neutral")) {
-            estadoEmocional = 0;
-        } else if (sentimiento.equals("alegre")) {
-            estadoEmocional = 1;
-        } else if (sentimiento.equals("triste")) {
-            estadoEmocional = 2;
-        } else if (sentimiento.equals("enfadado")) {
-            estadoEmocional = 3;
-        } else if (sentimiento.equals("euforico")) {
-            estadoEmocional = 4;
-        } else if (sentimiento.equals("ansioso")) {
-            estadoEmocional = 5;
-        } else if (sentimiento.equals("esperanzado")) {
-            estadoEmocional = 6;
-        } else if (sentimiento.equals("decepcionado")) {
-            estadoEmocional = 7;
-        } else if (sentimiento.equals("calmado")) {
-            estadoEmocional = 8;
-        } else if (sentimiento.equals("furioso")) {
-            estadoEmocional = 9;
-        } else if (sentimiento.equals("sorprendido")) {
-            estadoEmocional = 10;
-        } else if (sentimiento.equals("frustrado")) {
-            estadoEmocional = 11;
-        } else {
-            estadoEmocional = 0;
+        switch (sentimiento) {
+            case "alegre": estadoEmocional = 1; break;
+            case "triste": estadoEmocional = 2; break;
+            case "enfadado": estadoEmocional = 3; break;
+            case "euforico": estadoEmocional = 4; break;
+            case "ansioso": estadoEmocional = 5; break;
+            case "esperanzado": estadoEmocional = 6; break;
+            case "decepcionado": estadoEmocional = 7; break;
+            case "calmado": estadoEmocional = 8; break;
+            case "furioso": estadoEmocional = 9; break;
+            case "sorprendido": estadoEmocional = 10; break;
+            case "frustrado": estadoEmocional = 11; break;
+            default: estadoEmocional = 0; break; // neutral
         }
         AlmacenSentimientos.setESTADO_EMOCIONAL(estadoEmocional);
         AlmacenSentimientos.guardarSentimientos();

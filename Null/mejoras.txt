@@ -1,12 +1,10 @@
-gemini lo reparo
-que si posicionas el cursor encima coja el nonbre de la memoria no el por defecto de null
-que cuando se baya la mascota salga bien con el icono de la estrya
-
-yo------
-que se pueda mober la mascota eya sola por la pantalla
+que se pueda mober la mascota eya sola por la pantalla cuando ganas de jugar aumente
+que cuando se mueba poner imajen de correr acia cada direcion
 que canbie la imanejen segun las emociones del chat
+que se le ballan pasando la emociones a la ia
 cojer datos de fuera del chat y entregarselos ha la ia que lo mande hal chat
 que los mesajes emergentes sehan notificaciones solas de la ia que se escriban
+que guarde la salud y las ganas de jugar en BotCliente.java que se lo pase como los sentimientos desde el escript de phyton
 hacer instalador
 hacer requeriments.txt
 hareglar redmi
