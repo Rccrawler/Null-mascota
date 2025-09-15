@@ -272,12 +272,11 @@ public class MascotaDesktop {
         JMenuItem itemSalir = new JMenuItem("Salir");
         itemSalir.addActionListener(e -> {
             sentimientos.guardarSentimientos();
-            // Animación de salida opcional
-            new Thread(() -> {
-                panelMascota.cambiarImagen(RUTA_BASE_IMAGENES + "/null-exit.png");
-                try { Thread.sleep(1500); } catch (InterruptedException ex) {}
-                System.exit(0);
-            }).start();
+            // Animación de salida con Timer para asegurar que se renderiza
+            panelMascota.cambiarImagen(RUTA_BASE_IMAGENES + "/null-exit.png");
+            Timer exitTimer = new Timer(1500, ae -> System.exit(0));
+            exitTimer.setRepeats(false);
+            exitTimer.start();
         });
         menu.add(itemSalir);
 

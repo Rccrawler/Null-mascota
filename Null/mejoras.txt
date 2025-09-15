@@ -1,5 +1,8 @@
+gemini lo reparo
 que si posicionas el cursor encima coja el nonbre de la memoria no el por defecto de null
 que cuando se baya la mascota salga bien con el icono de la estrya
+
+yo------
 que se pueda mober la mascota eya sola por la pantalla
 que canbie la imanejen segun las emociones del chat
 cojer datos de fuera del chat y entregarselos ha la ia que lo mande hal chat
