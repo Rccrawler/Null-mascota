@@ -289,7 +289,7 @@ public class MascotaDesktop {
 
         menu.add("Jugar");
 
-        JMenuItem itemAblar = new JMenuItem("Ablar");
+        JMenuItem itemAblar = new JMenuItem("Hablar");
         itemAblar.addActionListener(e -> {
             VentanaChat chat = new VentanaChat(NOMBRE_MASCOTA);
             chat.setVisible(true);
